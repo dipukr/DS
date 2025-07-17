@@ -16,12 +16,12 @@ public class StackQueue {
 		q2 = tmp;
 	}
 
-	public int pop() {
+	public Object pop() {
 		count--;
 		return q1.dequeue();
 	}
 
-	public int top() {
+	public Object top() {
 		return q1.front();
 	}
 

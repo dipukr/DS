@@ -1,11 +1,11 @@
 package ds;
 
-public class Queue {
+public class Queue<T> {
 
 	public class Node {
-		public int data;
+		public T data;
 		public Node next;
-		public Node(int data) {
+		public Node(T data) {
 			this.data = data;
 		}
 	}
@@ -14,7 +14,7 @@ public class Queue {
 	private Node tail = null;
 	private int count = 0;
 
-	public void enqueue(int elem) {
+	public void enqueue(T elem) {
 		Node node = new Node(elem);
 		if (empty())
 			head = tail = node;
@@ -25,15 +25,15 @@ public class Queue {
 		count++;
 	}
 	
-	public int dequeue() {
+	public T dequeue() {
 		if (empty()) Error.fatal("Queue underflow.");
-		int retval = head.data;
+		T retval = head.data;
 		head = head.next;
 		count--;
 		return retval;
 	}
 
-	public int front() {
+	public T front() {
 		if (empty()) Error.fatal("Queue underflow.");
 		return head.data;
 	}
