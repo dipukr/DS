@@ -3,18 +3,18 @@ package ds;
 public class CircularList {
 
 	public class Node {
-		public int data;
+		public Object data;
 		public Node next;
-		public Node(int data) {
+		public Node(Object data) {
 			this.data = data;
 		}
 	}
 
-	private Node head;
-	private Node tail;
-	private int count;
+	private Node head = null;
+	private Node tail = null;
+	private int count = 0;
 
-	public void addHead(int data) {
+	public void addHead(Object data) {
 		Node node = new Node(data);
 		if (head == null) {
 			node.next = node;
