@@ -6,22 +6,22 @@ public class AvlTree {
 		public double data;
 		public int height;
 		public int factor;
-		public Node lhs, rhs;
+		public Node left;
+		public Node right;
 		public Node(double data) {
 			this.data = data;
 		}
 	}
 	
 	private Node root;
-	private int nodeCount = 0;
-
-	public int height() {
-		if (root == null) return 0;
-		return root.height;
-	}
+	private int nodeCount;
 
 	public int size() {
 		return nodeCount;
+	}
+	
+	public int height() {
+		return empty() ? 0 : root.height;
 	}
 	
 	public boolean empty() {
@@ -34,8 +34,8 @@ public class AvlTree {
 
 	public boolean find(Node node, double data) {
 		if (node == null) return false;
-		if (data < node.data) return find(node.lhs, data);
-		else if (data > node.data) return find(node.rhs, data);
+		if (data < node.data) return find(node.left, data);
+		else if (data > node.data) return find(node.right, data);
 		else return true;
 	}
 
@@ -51,26 +51,26 @@ public class AvlTree {
 	public Node insert(Node node, double data) {
 		if (node == null) 
 			return new Node(data);
-		if (data < node.data) node.lhs = insert(node.lhs, data);
-      	else node.rhs = insert(node.rhs, data);
+		if (data < node.data) node.left = insert(node.left, data);
+      	else node.right = insert(node.right, data);
 		update(node);
 		return balance(node);
 	}
 
 	public void update(Node node) {
-		int lhsHeight = (node.lhs == null) ? -1 : node.lhs.height;
-		int rhsHeight = (node.rhs == null) ? -1 : node.rhs.height;
+		int lhsHeight = (node.left == null) ? -1 : node.left.height;
+		int rhsHeight = (node.right == null) ? -1 : node.right.height;
 		node.height = Math.max(lhsHeight, rhsHeight) + 1;
 		node.factor = rhsHeight - lhsHeight;
 	}
 
 	public Node balance(Node node) {
 		if (node.factor == -2) {
-			if (node.lhs.factor <= 0)
+			if (node.left.factor <= 0)
         		return leftLeftCase(node);
         	return leftRightCase(node);
 		} else if (node.factor == +2) {
-			if (node.rhs.factor >= 0)
+			if (node.right.factor >= 0)
 				return rightRightCase(node);
 			return rightLeftCase(node);	
 		}
@@ -82,7 +82,7 @@ public class AvlTree {
 	}
 
 	public Node leftRightCase(Node node) {
-		node.lhs = leftRotation(node.lhs);
+		node.left = leftRotation(node.left);
 		return leftLeftCase(node);
 	}
 
@@ -91,23 +91,23 @@ public class AvlTree {
 	}
 
 	public Node rightLeftCase(Node node) {
-		node.rhs = rightRotation(node.rhs);
+		node.right = rightRotation(node.right);
 		return rightRightCase(node);
 	}
 
 	public Node leftRotation(Node node) {
-		Node parent = node.rhs;
-		node.rhs = parent.lhs;
-		parent.lhs = node;
+		Node parent = node.right;
+		node.right = parent.left;
+		parent.left = node;
 		update(node);
 		update(parent);
 		return parent;
 	}
 
 	public Node rightRotation(Node node) {
-		Node newParent = node.lhs;
-		node.lhs = newParent.rhs;
-		newParent.rhs = node;
+		Node newParent = node.left;
+		node.left = newParent.right;
+		newParent.right = node;
 		update(node);
 		update(newParent);
 		return newParent;
@@ -124,23 +124,23 @@ public class AvlTree {
 
 	public Node delete(Node node, double data) {
 		if (data < node.data)
-			node.lhs = delete(node.lhs, data);
+			node.left = delete(node.left, data);
 		else if (data > node.data)
-			node.rhs = delete(node.rhs, data);
+			node.right = delete(node.right, data);
 		else {
-			if (node.lhs == null)
-        		return node.rhs;
-			else if (node.rhs == null)
-				return node.lhs;
+			if (node.left == null)
+        		return node.right;
+			else if (node.right == null)
+				return node.left;
 			else {
-				if (node.lhs.height > node.rhs.height) {
-					double successorVal = findMax(node.lhs);
+				if (node.left.height > node.right.height) {
+					double successorVal = findMax(node.left);
 					node.data = successorVal;
-					node.lhs = delete(node.lhs, successorVal);
+					node.left = delete(node.left, successorVal);
 				} else {
-					double successorVal = findMin(node.rhs);
+					double successorVal = findMin(node.right);
 					node.data = successorVal;
-					node.rhs = delete(node.rhs, successorVal);
+					node.right = delete(node.right, successorVal);
 				}
 			}
 		}
@@ -149,22 +149,22 @@ public class AvlTree {
 	}
 
 	public double findMin(Node node) {
-		while (node.lhs != null)
-			node = node.lhs;
+		while (node.left != null)
+			node = node.left;
 		return node.data;
 	}
 
 	public double findMax(Node node) {
-		while (node.rhs != null)
-			node = node.rhs;
+		while (node.right != null)
+			node = node.right;
 		return node.data;
 	}
   	
   	public boolean valid(Node node) {
     	if (node == null) return true;
 		boolean valid = true;
-		if (node.lhs != null) valid = valid && node.lhs.data < node.data;
-		if (node.rhs != null) valid = valid && node.rhs.data < node.data;
-		return valid && valid(node.lhs) && valid(node.rhs);
+		if (node.left != null) valid = valid && node.left.data < node.data;
+		if (node.right != null) valid = valid && node.right.data < node.data;
+		return valid && valid(node.left) && valid(node.right);
 	}
 }
