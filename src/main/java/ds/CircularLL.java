@@ -17,6 +17,7 @@ public class CircularLL {
 		if (empty()) {
 			head = node;
 			head.next = head;
+			node.next = node;
 		} else {
 			
 		}
