@@ -16,7 +16,7 @@ public class MaxHeap {
 		if (count == data.length)
 			data = Arrays.copyOf(data, data.length * 2);
 		data[count++] = elem;
-		bubbleUp();
+		bubbleUP();
 	}
 
 	public double deleteMin() {
@@ -33,7 +33,7 @@ public class MaxHeap {
 		return data[0];
 	}
 
-	public void bubbleUp() {
+	public void bubbleUP() {
 		int i = count - 1;
 		while (hasParent(i) && data[parent(i)] > data[i]) {
 			swap(i, parent(i));

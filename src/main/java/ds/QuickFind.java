@@ -10,8 +10,8 @@ public class QuickFind {
 			id[i] = i;
 	}
 
-	public boolean find(int u, int v) {
-		return id[u] == id[v];
+	public int find(int u) {
+		return id[u];
 	}
 
 	public void union(int u, int v) {
@@ -19,5 +19,9 @@ public class QuickFind {
 		for (int i = 0; i < id.length; i++)
 			if (id[i] == pid)
 				id[i] = id[v];
+	}
+	
+	public boolean connected(int u, int v) {
+		return find(u) == find(v);
 	}
 }

@@ -8,4 +8,11 @@ public class Error {
 		System.out.println("Fatal error: " + messge);
 		System.exit(1);
 	}
+	
+	public static void fatal(boolean flag, String messge) {
+		if (flag) {
+			System.out.println("Fatal error: " + messge);
+			System.exit(1);
+		}
+	}
 }

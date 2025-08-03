@@ -2,8 +2,8 @@ package ds;
 
 public class RBTree {
 
-	private static final int RED = 1;
-	private static final int BLACK = 2;
+	private static final int RED = 0;
+	private static final int BLACK = 1;
 
 	public class Node {
 		public int data;
@@ -16,6 +16,7 @@ public class RBTree {
 		}
 	}
 
+	private final Node NIL = new Node(0);
 	private Node root = null;
 	private int nodeCount = 0;
 
@@ -24,19 +25,23 @@ public class RBTree {
 	}
 	
 	
-	public boolean contains(int key) {
-		if (getNode(key) == null) return false;
-		else return true;
-	}
-
-	public Node getNode(int key) {
+	public boolean search(int key) {
 		Node node = root;
 		while (node != null) {
 			if (key < node.data) node = node.left;
 			else if (key > node.data) node = node.right;
-			else return node;
+			else return true;
 		}
-		return null;
+		return false;
+	}
+	
+	public void insert(int data) {
+		Node node = new Node(data);
+		
+	}
+	
+	public void leftRotate(Node x) {
+		Node 
 	}
 
 	public int size() {
@@ -45,9 +50,5 @@ public class RBTree {
 
 	public boolean empty() {
 		return size() == 0;
-	}
-
-	public boolean notEmpty() {
-		return !empty();
 	}
 }

@@ -15,8 +15,8 @@ public class CircularLL {
 	public void addTail(Object data) {
 		Node node = new Node(data);
 		if (empty()) {
-			head = tail = node;
-			node.next
+			head = node;
+			head.next = head;
 		} else {
 			
 		}
