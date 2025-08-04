@@ -13,28 +13,28 @@ public class BST {
 
 	private Node root;
 	
-	public void insert(int data) {
-		if (!search(data)) {
-			root = insert(root, data);
-		}
-	}
-
-	public void insert(int data) {
-		if (search(data)) return;
-		Node node = new Node(data);
-		if (empty()) {
-			root = node;
-			return;
-		}
-		Node curr = root, prev = null;
-		while (curr != null) {
-			prev = curr;
-			if (data < curr.data) curr = curr.left;
-			else if (data > curr.data) curr = curr.right;
-		}
-		if (data < prev.data) prev.left = node;
-		else prev.right = node;
-	}
+//	public void insert(int data) {
+//		if (!search(data)) {
+//			root = insert(root, data);
+//		}
+//	}
+//
+//	public void insert(int data) {
+//		if (search(data)) return;
+//		Node node = new Node(data);
+//		if (empty()) {
+//			root = node;
+//			return;
+//		}
+//		Node curr = root, prev = null;
+//		while (curr != null) {
+//			prev = curr;
+//			if (data < curr.data) curr = curr.left;
+//			else if (data > curr.data) curr = curr.right;
+//		}
+//		if (data < prev.data) prev.left = node;
+//		else prev.right = node;
+//	}
 	
 	public boolean search(int data) {
 		Node node = root;
@@ -70,15 +70,15 @@ public class BST {
 		
 	}
 
-	public void delete(int data) {
-		if (search(data)) {
-			root = delete(root, data);
-		}
-	}
-
-	public void merge(BinarySearchTree tree) {
-		this.root = merge(this.root, tree.root);
-	}
+//	public void delete(int data) {
+//		if (search(data)) {
+//			root = delete(root, data);
+//		}
+//	}
+//
+//	public void merge(BinarySearchTree tree) {
+//		this.root = merge(this.root, tree.root);
+//	}
 
 	public Node merge(Node t1, Node t2) {
 		if (t1 == null) return t2;
