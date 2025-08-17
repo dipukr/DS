@@ -3,13 +3,8 @@ package main;
 public class Trie {
 
 	public class Node {
-		public Node[] childs;
 		public boolean word;
-		
-		public Node() {
-			this.word = false;
-			this.childs = new Node[26];
-		}
+		public Node[] childs = new Node[26];
 	}
 
 	private Node root = new Node();
