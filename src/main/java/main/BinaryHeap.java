@@ -2,12 +2,12 @@ package main;
 
 import java.util.Arrays;
 
-public class MinHeap {
+public class BinaryHeap {
 	
 	private double[] data;
 	private int count;
 
-	public MinHeap() {
+	public BinaryHeap() {
 		this.data = new double[8];
 		this.count = 0;
 	}
@@ -16,14 +16,14 @@ public class MinHeap {
 		if (count == data.length)
 			data = Arrays.copyOf(data, data.length * 2);
 		data[count++] = elem;
-		bubbleUP();
+		moveUP();
 	}
 
 	public double deleteMin() {
 		double val = findMin();
 		data[0] = data[count - 1];
 		count--;
-		bubbleDown();
+		moveDown();
 		return val;
 	}
 
@@ -33,22 +33,15 @@ public class MinHeap {
 		return data[0];
 	}
 
-	public void bubbleUP() {
+	public void moveUP() {
 		int i = count - 1;
 		while (hasParent(i) && data[parent(i)] > data[i]) {
 			swap(i, parent(i));
 			i = parent(i);
 		}
 	}
-	
-	public void moveUP(int i) {
-		if (hasParent(i) && data[parent(i)] > data[i]) {
-			swap(i, parent(i));
-			moveUP(parent(i));
-		}
-	}
 
-	public void bubbleDown() {
+	public void moveDown() {
 		int i = 0;
 		while (hasLeft(i)) {
 			int smaller = left(i);
@@ -58,18 +51,6 @@ public class MinHeap {
 				swap(i, smaller);
 			else break;
 			i = smaller;
-		}
-	}
-	
-	public void moveDown(int i) {
-		if (hasLeft(i)) {
-			int smaller = left(i);
-			if (hasRight(i) && data[left(i)] > data[right(i)])
-				smaller = right(i);
-			if (data[i] > data[smaller]) {
-				swap(i, smaller);
-				moveDown(smaller);
-			}
 		}
 	}
 	
