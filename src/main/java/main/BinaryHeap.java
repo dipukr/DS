@@ -2,6 +2,8 @@ package main;
 
 import java.util.Arrays;
 
+import common.Error;
+
 public class BinaryHeap {
 	
 	private double[] data;

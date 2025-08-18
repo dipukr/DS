@@ -1,5 +1,7 @@
 package main;
 
+import common.Error;
+
 public class List {
 	
 	public class Node {

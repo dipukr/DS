@@ -1,5 +1,7 @@
 package main;
 
+import common.Error;
+
 public class BinarySearchTree {
 	
 	public class Node {

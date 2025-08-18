@@ -1,5 +1,7 @@
 package main;
 
+import common.Error;
+
 public class QueueStack {
 
 	private Stack s1 = new Stack();
