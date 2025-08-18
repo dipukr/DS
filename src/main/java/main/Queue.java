@@ -1,7 +1,5 @@
 package main;
 
-import common.Error;
-
 public class Queue<T> {
 
 	public class Node {

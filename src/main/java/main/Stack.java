@@ -1,7 +1,5 @@
 package main;
 
-import common.Error;
-
 public class Stack {
 	
 	public class Node {

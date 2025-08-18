@@ -2,8 +2,6 @@ package main;
 
 import java.util.StringJoiner;
 
-import common.Error;
-
 public class Vector {
 
 	private double[] data;
