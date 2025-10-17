@@ -16,9 +16,10 @@ public class Queue<T> {
 
 	public void enqueue(T elem) {
 		Node node = new Node(elem);
-		if (empty())
-			head = tail = node;
-		else {
+		if (empty()) {
+			head = node;
+			tail = node;
+		} else {
 			tail.next = node;
 			tail = node;
 		}
@@ -26,7 +27,7 @@ public class Queue<T> {
 	}
 	
 	public T dequeue() {
-		if (empty()) Error.fatal("Queue underflow.");
+		if (empty()) Error.error("Queue underflow.");
 		T retval = head.data;
 		head = head.next;
 		count--;
@@ -34,7 +35,7 @@ public class Queue<T> {
 	}
 
 	public T front() {
-		if (empty()) Error.fatal("Queue underflow.");
+		if (empty()) Error.error("Queue underflow.");
 		return head.data;
 	}
 	
@@ -44,9 +45,5 @@ public class Queue<T> {
 	
 	public boolean empty() {
 		return size() == 0;
-	}
-	
-	public boolean notEmpty() {
-		return !empty();
 	}
 }

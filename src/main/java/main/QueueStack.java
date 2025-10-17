@@ -2,27 +2,23 @@ package main;
 
 public class QueueStack {
 
-	private Stack s1 = new Stack();
-	private Stack s2 = new Stack();
+	private Stack a = new Stack();
+	private Stack b = new Stack();
 
 	public void enqueue(int elem) {
-		s1.push(elem);
+		a.push(elem);
 	}
 
 	public int dequeue() {
-		if (empty()) Error.fatal("Queue underflow.");
-		if (s2.empty()) {
-			while (s1.notEmpty())
-				s2.push(s1.pop());
+		if (empty()) Error.error("Queue underflow.");
+		if (b.empty()) {
+			while (a.notEmpty())
+				b.push(a.pop());
 		}
-		return s2.pop();
+		return b.pop();
 	}
 
 	public boolean empty() {
-		return s1.empty() && s2.empty();
-	}
-	
-	public boolean notEmpty() {
-		return !empty();
+		return a.empty() && b.empty();
 	}
 }

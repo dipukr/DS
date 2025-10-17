@@ -23,7 +23,6 @@ public class RBTree {
 		node.color = node.color == Color.RED ? Color.BLACK : Color.RED;
 	}
 	
-	
 	public boolean search(int key) {
 		Node node = root;
 		while (node != null) {

@@ -15,18 +15,18 @@ public class QueueArray {
 	}
 
 	public void enqueue(int elem) {
-		if (rear == data.length - 1) Error.fatal("Queue overflow.");
+		if (rear == data.length - 1) Error.error("Queue overflow.");
 		data[++rear] = elem;
 		count++;
 	}
 
 	public int dequeue() {
-		if (empty()) Error.fatal("Queue empty.");
+		if (empty()) Error.error("Queue empty.");
 		return data[front++];
 	}
 	
 	public int front() {
-		if (empty()) Error.fatal("Queue empty.");
+		if (empty()) Error.error("Queue empty.");
 		return data[front];
 	}
 
@@ -36,9 +36,5 @@ public class QueueArray {
 	
 	public boolean empty() {
 		return front > rear;
-	}
-	
-	public boolean notEmpty() {
-		return !empty();
 	}
 }
