@@ -40,17 +40,14 @@ public class AvlTree {
 	}
 
 	public boolean insert(double data) {
-		if (!find(root, data)) {
-			root = insert(root, data);
-			nodeCount++;
-			return true;
-		}
-		return false;
+		if (find(root, data)) return false;
+		root = insert(root, data);
+		nodeCount++;
+		return true;
 	}
 
 	public Node insert(Node node, double data) {
-		if (node == null) 
-			return new Node(data);
+		if (node == null) return new Node(data);
 		if (data < node.data) node.left = insert(node.left, data);
       	else node.right = insert(node.right, data);
 		update(node);
@@ -105,12 +102,12 @@ public class AvlTree {
 	}
 
 	public Node rightRotation(Node node) {
-		Node newParent = node.left;
-		node.left = newParent.right;
-		newParent.right = node;
+		Node parent = node.left;
+		node.left = parent.right;
+		parent.right = node;
 		update(node);
-		update(newParent);
-		return newParent;
+		update(parent);
+		return parent;
 	}
 
 	public boolean delete(double data) {
@@ -160,11 +157,11 @@ public class AvlTree {
 		return node.data;
 	}
   	
-  	public boolean valid(Node node) {
-    	if (node == null) return true;
+  	public boolean valid(Node root) {
+    	if (root == null) return true;
 		boolean valid = true;
-		if (node.left != null) valid = valid && node.left.data < node.data;
-		if (node.right != null) valid = valid && node.right.data < node.data;
-		return valid && valid(node.left) && valid(node.right);
+		if (root.left != null) valid = valid && root.left.data < root.data;
+		if (root.right != null) valid = valid && root.right.data > root.data;
+		return valid && valid(root.left) && valid(root.right);
 	}
 }

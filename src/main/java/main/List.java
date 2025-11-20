@@ -24,11 +24,8 @@ public class List {
 	private Node tail;
 	
 	public void addHead(Object data) {
-		if (empty()) {
-			head = tail = new Node(data);
-		} else {
-			head = new Node(data, head);
-		}
+		if (empty()) head = tail = new Node(data);
+		else head = new Node(data, head);
 	}
 	
 	public void addTail(Object data) {
@@ -80,14 +77,14 @@ public class List {
 		System.out.println("null");
 	}
 	
-	public boolean empty() {
-		return head == null && tail == null;
-	}
-	
 	public int size() {
 		int nodeCount = 0;
 		for (Node curr = head; curr != null; curr = curr.next)
 			nodeCount++;
 		return nodeCount;
+	}
+	
+	public boolean empty() {
+		return size() == 0;
 	}
 }

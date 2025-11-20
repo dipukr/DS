@@ -207,8 +207,4 @@ public class BinarySearchTree {
 	public boolean empty() {
 		return size() == 0;
 	}
-	
-	public boolean notEmpty() {
-		return !empty();
-	}
 }

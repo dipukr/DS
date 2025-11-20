@@ -12,6 +12,12 @@ public class Point {
 		return point;
 	}
 	
+	public double distance(Point other) {
+		double dx = Math.pow(other.x - this.x, 2);
+		double dy = Math.pow(other.y - this.y, 2);
+		return Math.sqrt(dx + dy);
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("(%d,%d)", x, y);
