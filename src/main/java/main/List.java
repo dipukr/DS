@@ -5,18 +5,10 @@ public class List {
 	public class Node {
 		public Object data;
 		public Node next;
-		
-		public Node(Object data) {
-			this(data, null);
-		}
-		
+		public Node(Object data) {this.data = data;}
 		public Node(Object data, Node next) {
 			this.data = data;
 			this.next = next;
-		}
-		
-		public String toString() {
-			return data.toString();
 		}
 	}
 	
@@ -39,14 +31,14 @@ public class List {
 	}
 	
 	public void deleteHead() {
-		if (empty()) Error.fatal("List is empty.");
+		if (empty()) Error.fatal("List is empty");
 		head = head.next;
 		if (head == null)
 			tail = null;
 	}
 	
 	public void deleteTail() {
-		if (empty()) Error.fatal("List is empty.");
+		if (empty()) Error.fatal("List is empty");
 		if (head.next == null) {
 			head = tail = null;
 		} else {
@@ -59,9 +51,9 @@ public class List {
 	}
 	
 	public void reverse() {
-		Node prev = null, curr = head, next = null;
+		Node prev = null, curr = head;
 		while (curr != null) {
-			next = curr.next;
+			Node next = curr.next;
 			curr.next = prev;
 			prev = curr;
 			curr = next;
@@ -71,8 +63,8 @@ public class List {
 	}
 	
 	public void dump() {
-		if (!empty()) return;
-		for (var curr = head; curr != null; curr = curr.next)
+		if (empty()) return;
+		for (Node curr = head; curr != null; curr = curr.next)
 			System.out.printf("%s->", curr.data);
 		System.out.println("null");
 	}
@@ -80,7 +72,7 @@ public class List {
 	public int size() {
 		int nodeCount = 0;
 		for (Node curr = head; curr != null; curr = curr.next)
-			nodeCount++;
+			nodeCount += 1;
 		return nodeCount;
 	}
 	

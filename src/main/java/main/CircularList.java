@@ -11,14 +11,13 @@ public class CircularList {
 	}
 
 	private Node head = null;
-	private Node tail = null;
 	private int count = 0;
 
-	public void addHead(Object data) {
-		Node node = new Node(data);
+	public void addHead(Object elem) {
+		Node node = new Node(elem);
 		if (head == null) {
 			node.next = node;
-			head = tail = node;
+			head = node;
 			return;
 		}
 		Node curr = head;
@@ -42,7 +41,7 @@ public class CircularList {
 		node.next = head;
 	}
 
-	public void dump() {
+	public void draw() {
 		if (head == null) return;
 		Node curr = head;
 		do {
@@ -62,9 +61,5 @@ public class CircularList {
 	
 	public boolean empty() {
 		return size() == 0;
-	}
-	
-	public boolean notEmpty() {
-		return !empty();
 	}
 }

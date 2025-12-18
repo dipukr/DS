@@ -2,12 +2,12 @@ package main;
 
 import java.util.Arrays;
 
-public class BinaryHeap_R {
+public class BinaryHeapR {
 	
 	private double[] data;
 	private int count;
 
-	public BinaryHeap_R() {
+	public BinaryHeapR() {
 		this.data = new double[8];
 		this.count = 0;
 	}

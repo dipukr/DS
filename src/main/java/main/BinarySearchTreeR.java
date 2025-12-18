@@ -1,6 +1,6 @@
 package main;
 
-public class BinarySearchTree_R {
+public class BinarySearchTreeR {
 	
 	public class Node {
 		public int data;
@@ -74,7 +74,7 @@ public class BinarySearchTree_R {
 		}
 	}
 
-	public void merge(BinarySearchTree_R tree) {
+	public void merge(BinarySearchTreeR tree) {
 		this.root = merge(this.root, tree.root);
 	}
 
@@ -165,9 +165,5 @@ public class BinarySearchTree_R {
 	
 	public boolean empty() {
 		return size() == 0;
-	}
-	
-	public boolean notEmpty() {
-		return !empty();
 	}
 }

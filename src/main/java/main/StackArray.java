@@ -11,8 +11,8 @@ public class StackArray {
 	}
 
 	public void push(Object elem) {
-		if (++sp == data.length) Error.fatal("Stack overflow");
-		data[sp] = elem;
+		if (full()) Error.fatal("Stack overflow");
+		data[++sp] = elem;
 	}
 
 	public Object pop() {
@@ -27,6 +27,10 @@ public class StackArray {
 
 	public int size() {
 		return sp + 1;
+	}
+	
+	public boolean full() {
+		return sp == data.length - 1;
 	}
 	
 	public boolean empty() {

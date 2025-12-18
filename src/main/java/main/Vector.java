@@ -1,6 +1,7 @@
 package main;
 
-import java.util.StringJoiner;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Vector {
 
@@ -18,26 +19,26 @@ public class Vector {
 
 	public void scale(double factor) {
 		for (int i = 0; i < size(); i++)
-			data[i] = factor * data[i];
+			this.data[i] = factor * this.data[i];
 	}
 
 	public void add(Vector that) {
 		verifyDim(this, that);
-		if (this.size() != that.size()) Error.fatal("dim incompatible");
+		if (this.size() != that.size()) Error.fatal("Dim incompatible");
 		for (int i = 0; i < size(); i++)
-			data[i] += that.data[i];
+			this.data[i] += that.data[i];
 	}
 
-	public void subtract(Vector that) {
+	public void sub(Vector that) {
 		verifyDim(this, that);
 		for (int i = 0; i < size(); i++)
-			data[i] -= that.data[i];
+			this.data[i] -= that.data[i];
 	}
 
-	public void multiply(Vector that) {
+	public void mul(Vector that) {
 		verifyDim(this, that);
 		for (int i = 0; i < size(); i++)
-			data[i] *= that.data[i];
+			this.data[i] *= that.data[i];
 	}
 
 	public double dot(Vector that) {
@@ -48,40 +49,40 @@ public class Vector {
 		return result;
 	}
 
-	public static Vector times(Vector vector, double factor) {
-		Vector temp = new Vector(vector.size());
-		for (int i = 0; i < vector.size(); i++)
-			temp.data[i] = factor * vector.data[i];
-		return temp;
+	public static Vector times(Vector a, double factor) {
+		Vector vec = new Vector(a.size());
+		for (int i = 0; i < a.size(); i++)
+			vec.data[i] = factor * a.data[i];
+		return vec;
 	}
 
 	public static Vector add(Vector a, Vector b) {
 		verifyDim(a, b);
-		Vector temp = new Vector(a.size());
+		Vector vec = new Vector(a.size());
 		for (int i = 0; i < a.size(); i++)
-			temp.data[i] = a.data[i] + b.data[i];
-		return temp;
+			vec.data[i] = a.data[i] + b.data[i];
+		return vec;
 	}
 	
 	public static void verifyDim(Vector a, Vector b) {
 		if (a.size() != b.size())
-			Error.fatal("Dimension unmatched.");
+			Error.fatal("Dimension unmatched");
 	}
 
-	public static Vector subtract(Vector a, Vector b) {
+	public static Vector sub(Vector a, Vector b) {
 		verifyDim(a, b);
-		Vector temp = new Vector(a.size());
+		Vector vec = new Vector(a.size());
 		for (int i = 0; i < a.size(); i++)
-			temp.data[i] = a.data[i] - b.data[i];
-		return temp;
+			vec.data[i] = a.data[i] - b.data[i];
+		return vec;
 	}
 
-	public static Vector multiply(Vector a, Vector b) {
+	public static Vector mul(Vector a, Vector b) {
 		verifyDim(a, b);
-		Vector temp = new Vector(a.size());
+		Vector vec = new Vector(a.size());
 		for (int i = 0; i < a.size(); i++)
-			temp.data[i] = a.data[i] * b.data[i];
-		return temp;
+			vec.data[i] = a.data[i] * b.data[i];
+		return vec;
 	}
 
 	public static double dot(Vector a, Vector b) {
@@ -100,7 +101,7 @@ public class Vector {
 
 	public double distanceTo(Vector that) {
 		verifyDim(this, that);
-		return Vector.subtract(this, that).magnitude();
+		return Vector.sub(this, that).magnitude();
 	}
 
 	public double magnitude() {
@@ -117,9 +118,8 @@ public class Vector {
 
 	@Override
 	public String toString() {
-		var s = new StringJoiner(",", "[", "]");
-		for (var elem: data)
-			s.add(String.valueOf(elem));
-		return s.toString();
+		return Arrays.stream(data)
+			.mapToObj(Double::toString)
+			.collect(Collectors.joining(",", "[", "]"));
 	}
 }

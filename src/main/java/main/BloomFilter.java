@@ -6,45 +6,35 @@ import java.util.zip.Adler32;
 
 public class BloomFilter {
 	private BitSet bitSet;
-	private int bitSetSize;
-	private int numHashFunctions;
+	private int numHash;
 
-	public BloomFilter(int size, int numHashFunctions) {
-		this.bitSetSize = size;
-		this.numHashFunctions = numHashFunctions;
-		this.bitSet = new BitSet(bitSetSize);
+	public BloomFilter(int size, int numHash) {
+		this.bitSet = new BitSet(size);
+		this.numHash = numHash;
 	}
 
 	public void add(String value) {
-		int[] hashes = getHashes(value);
-		for (int hash : hashes) {
-			bitSet.set(Math.abs(hash % bitSetSize));
-		}
+		for (int hash: getHashes(value))
+			bitSet.set(Math.abs(hash % bitSet.size()));
 	}
 
 	public boolean mightContain(String value) {
-		int[] hashes = getHashes(value);
-		for (int hash : hashes) {
-			if (!bitSet.get(Math.abs(hash % bitSetSize))) {
+		for (int hash: getHashes(value))
+			if (!bitSet.get(Math.abs(hash % bitSet.size())))
 				return false;
-			}
-		}
 		return true;
 	}
 
 	public int[] getHashes(String value) {
-		int[] hashes = new int[numHashFunctions];
-
-		for (int i = 0; i < numHashFunctions; i++) {
+		int[] hashes = new int[numHash];
+		for (int i = 0; i < numHash; i++) {
 			String combined = i + value;
-			int hash = combined.hashCode(); // basic hash
+			int hash = combined.hashCode();
 			hashes[i] = hash;
 		}
-
 		return hashes;
 	}
 
-	// Optional: stronger hash functions (CRC32, Adler32)
 	public static int crc32(String input) {
 		CRC32 crc = new CRC32();
 		crc.update(input.getBytes());
@@ -61,10 +51,10 @@ public class BloomFilter {
 		BloomFilter filter = new BloomFilter(1024, 3);
 
 		filter.add("apple");
-		filter.add("banana");
+		filter.add("mango");
 
-		System.out.println("apple: " + filter.mightContain("apple")); // true
-		System.out.println("banana: " + filter.mightContain("banana")); // true
-		System.out.println("grape: " + filter.mightContain("grape")); // false (probably)
+		Console.draw("apple: ", filter.mightContain("apple")); // true
+		Console.draw("mango: ", filter.mightContain("mango")); // true
+		Console.draw("lemon: ", filter.mightContain("lemon")); // false (probably)
 	}
 }

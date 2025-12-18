@@ -22,7 +22,7 @@ public class Stack {
 	}
 
 	public int pop() {
-		if (empty()) Error.fatal("Stack underflow.");
+		if (empty()) Error.fatal("Stack underflow");
 		int retval = head.data;
 		head = head.next;
 		nodeCount--;
@@ -30,7 +30,7 @@ public class Stack {
 	}
 
 	public int top() {
-		if (empty()) Error.fatal("Stack underflow.");
+		if (empty()) Error.fatal("Stack underflow");
 		return head.data;
 	}
 	
@@ -40,9 +40,5 @@ public class Stack {
 	
 	public boolean empty() {
 		return size() == 0;
-	}
-	
-	public boolean notEmpty() {
-		return !empty();
 	}
 }

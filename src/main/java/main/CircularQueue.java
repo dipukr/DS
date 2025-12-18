@@ -4,47 +4,52 @@ public class CircularQueue {
 
 	private Object[] data;
 	private int capacity;
-	private int front;
-	private int rear;
+	private int head;
+	private int tail;
 
 	public CircularQueue(int capacity) {
 		this.data = new Object[capacity];
 		this.capacity = capacity;
-		this.front = -1;
-		this.rear = -1;
+		this.head = -1;
+		this.tail = -1;
 	}
 
 	public void enqueue(Object elem) {
 		if (full()) Error.fatal("Queue overflow.");
-		if (empty()) front = 0;
-		rear = (rear + 1) % capacity;
-		data[rear] = elem;
+		if (empty()) head = tail = 0;
+		else tail = (tail + 1) % capacity;
+		data[tail] = elem;
 	}
 
 	public Object dequeue() {
 		if (empty()) Error.fatal("Queue empty.");
-		Object retval = data[front];
-		if (front == rear) front = rear = -1;
-		else front = (front + 1) % capacity;
-		return retval;
+		Object elem = data[head];
+		if (head == tail) head = tail = -1;
+		else head = (head + 1) % capacity;
+		return elem;
 	}
 
 	public Object front() {
 		if (empty()) Error.fatal("Queue empty.");
-		return data[front];
+		return data[head];
 	}
 
 	public boolean full() {
-		return (front == (rear + 1) % capacity);
+		return (head == (tail + 1) % capacity);
 	}
 
 	public int size() {
 		if (empty()) return 0;
-		if (rear >= front) return rear - front + 1;
-		return capacity - front + rear + 1;
+		if (tail >= head) return tail - head + 1;
+		return capacity - head + tail + 1;
+	}
+	
+	public int length() {
+		if (empty()) return 0;
+		return (tail - head + capacity) % capacity + 1;
 	}
 
 	public boolean empty() {
-		return front == -1;
+		return head == -1;
 	}
 }

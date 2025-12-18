@@ -15,7 +15,7 @@ public class BitSet {
 	}
 	
 	public boolean get(int index) {
-		return (data[index / 64] & (1L << (index % 64))) == 0L;
+		return (data[index / 64] & (1L << (index % 64))) == 1L;
 	}
 
 	public boolean contains(int index) {

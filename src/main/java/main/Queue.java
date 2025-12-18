@@ -1,11 +1,11 @@
 package main;
 
-public class Queue<T> {
+public class Queue {
 
 	public class Node {
-		public T data;
+		public int data;
 		public Node next;
-		public Node(T data) {
+		public Node(int data) {
 			this.data = data;
 		}
 	}
@@ -14,7 +14,7 @@ public class Queue<T> {
 	private Node tail = null;
 	private int count = 0;
 
-	public void enqueue(T elem) {
+	public void enqueue(int elem) {
 		Node node = new Node(elem);
 		if (empty()) {
 			head = node;
@@ -26,16 +26,16 @@ public class Queue<T> {
 		count++;
 	}
 	
-	public T dequeue() {
+	public int dequeue() {
 		if (empty()) Error.error("Queue underflow.");
-		T retval = head.data;
+		int elem = head.data;
 		head = head.next;
 		count--;
-		return retval;
+		return elem;
 	}
 
-	public T front() {
-		if (empty()) Error.error("Queue underflow.");
+	public int front() {
+		if (empty()) Error.error("Queue underflow");
 		return head.data;
 	}
 	

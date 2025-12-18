@@ -1,7 +1,7 @@
 package main;
 
-public class Map {
-
+public class Hashtable {
+	
 	public class Node {
 		public Object key;
 		public Object val;
@@ -18,24 +18,24 @@ public class Map {
 	private int listCount = 0;
 	private int count = 0;
 	
-	public Map() {
+	public Hashtable() {
 		this(8);
 	}
 
-	public Map(int listCount) {
+	public Hashtable(int listCount) {
 		this.count = 0;
 		this.listCount = listCount;
 		this.heads = new Node[listCount];
 	}
 
 	public void resize(int chainCount) {
-		Map m = new Map(chainCount);
+		Hashtable m = new Hashtable(chainCount);
 		for (int i = 0; i < chainCount; i++)
 			for (Node node = heads[i]; node != null; node = node.next)
 				m.put(node.key, node.val);
-		this.listCount = m.listCount;
-		this.heads = heads;
+		this.heads = m.heads;
 		this.count = m.count;
+		this.listCount = m.listCount;
 	}
 
 	public void put(Object key, Object val) {
@@ -68,9 +68,5 @@ public class Map {
 	
 	public boolean empty() {
 		return size() == 0;
-	}
-	
-	public boolean notEmpty() {
-		return !empty();
 	}
 }
