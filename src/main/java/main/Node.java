@@ -6,18 +6,20 @@ import java.util.HashMap;
 
 public class Node {
 	private String id;
+	private long hash;
 	private Map<String, String> data = new HashMap<>();
 
 	public Node(String id) {
 		this.id = id;
+		this.hash = Tools.hash(id);
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public long getHash() {
+		return hash;
 	}
 
 	public void put(String key, String value) {
