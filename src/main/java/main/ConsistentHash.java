@@ -9,7 +9,7 @@ public class ConsistentHash {
 	private TreeMap<Long, Node> ring = new TreeMap<>();
 
 	public ConsistentHash(Node... nodes) {
-		for (Node node : nodes) {
+		for (Node node: nodes) {
 			long hash = Tools.hash(node.getId());
 			ring.put(hash, node);
 		}
@@ -38,22 +38,19 @@ public class ConsistentHash {
 	}
 
 	public void removeNode(Node node) {
-		long hash = Tools.hash(node.getId());
+		long hash = node.getHash();
 		Entry<Long, Node> nextEntry = ring.higherEntry(hash);
-		if (nextEntry == null)
-			nextEntry = ring.firstEntry();
+		if (nextEntry == null) nextEntry = ring.firstEntry();
 		Node successor = nextEntry.getValue();
 		successor.getData().putAll(node.getData());
 		ring.remove(hash);
 	}
 
 	public Node getNode(String key) {
-		if (ring.isEmpty())
-			return null;
+		if (ring.isEmpty()) return null;
 		long hash = Tools.hash(key);
 		Entry<Long, Node> entry = ring.ceilingEntry(hash);
-		if (entry == null)
-			entry = ring.firstEntry();
+		if (entry == null) entry = ring.firstEntry();
 		return entry.getValue();
 	}
 }
