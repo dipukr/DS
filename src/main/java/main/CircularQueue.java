@@ -1,7 +1,6 @@
 package main;
 
 public class CircularQueue {
-
 	private Object[] data;
 	private int capacity;
 	private int head;

@@ -16,18 +16,6 @@ public class AvlTree {
 	private Node root;
 	private int nodeCount;
 
-	public int size() {
-		return nodeCount;
-	}
-	
-	public int height() {
-		return empty() ? 0 : root.height;
-	}
-	
-	public boolean empty() {
-		return size() == 0;
-	}
-
 	public boolean find(double data) {
 		return find(root, data);
 	}
@@ -163,5 +151,17 @@ public class AvlTree {
 		if (root.left != null) valid = valid && root.left.data < root.data;
 		if (root.right != null) valid = valid && root.right.data > root.data;
 		return valid && valid(root.left) && valid(root.right);
+	}
+  	
+  	public int size() {
+		return nodeCount;
+	}
+	
+	public int height() {
+		return empty() ? 0 : root.height;
+	}
+	
+	public boolean empty() {
+		return size() == 0;
 	}
 }
