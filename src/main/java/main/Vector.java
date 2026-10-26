@@ -24,7 +24,6 @@ public class Vector {
 
 	public void add(Vector that) {
 		verifyDim(this, that);
-		if (this.size() != that.size()) Error.fatal("Dim incompatible");
 		for (int i = 0; i < size(); i++)
 			this.data[i] += that.data[i];
 	}
@@ -63,11 +62,6 @@ public class Vector {
 			vec.data[i] = a.data[i] + b.data[i];
 		return vec;
 	}
-	
-	public static void verifyDim(Vector a, Vector b) {
-		if (a.size() != b.size())
-			Error.fatal("Dimension unmatched");
-	}
 
 	public static Vector sub(Vector a, Vector b) {
 		verifyDim(a, b);
@@ -93,9 +87,13 @@ public class Vector {
 		return result;
 	}
 	
+	public static void verifyDim(Vector a, Vector b) {
+		if (a.size() != b.size())
+			Error.fatal("Dimension unmatched");
+	}
+	
 	public Vector direction() {
-		if (magnitude() == 0.0)
-			Error.fatal("Zero vector has no direction.");
+		if (magnitude() == 0.0) Error.fatal("Zero vector has no direction.");
 		return Vector.times(this, 1.0 / magnitude());
 	}
 

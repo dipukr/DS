@@ -12,20 +12,17 @@ public class Stack {
 	}
 
 	private Node head = null;
-	private int nodeCount = 0;
 
 	public void push(int elem) {
 		Node node = new Node(elem);
 		node.next = head;
 		head = node;
-		nodeCount++;
 	}
 
 	public int pop() {
 		if (empty()) Error.fatal("Stack underflow");
 		int retval = head.data;
 		head = head.next;
-		nodeCount--;
 		return retval;
 	}
 
@@ -35,7 +32,10 @@ public class Stack {
 	}
 	
 	public int size() {
-		return nodeCount;
+		int count = 0;
+		for (Node curr = head; curr != null; curr = curr.next)
+			count += 1;
+		return count;
 	}
 	
 	public boolean empty() {

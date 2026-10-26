@@ -11,7 +11,6 @@ public class CircularList {
 	}
 
 	private Node head = null;
-	private int count = 0;
 
 	public void addHead(Object elem) {
 		Node node = new Node(elem);
@@ -48,7 +47,7 @@ public class CircularList {
 			System.out.printf("%d->", curr.data);
 			curr = curr.next;	
 		} while (curr != head);
-		System.out.println("null");
+		System.out.println(head.data);
 	}
 	
 	public boolean hasCycle() {
@@ -56,10 +55,27 @@ public class CircularList {
 	}
 
 	public int size() {
+		if (head == null) return 0;
+		Node curr = head;
+		int count = 0;
+		do {
+			count += 1;
+			curr = curr.next;
+		} while (curr != head);
 		return count;
 	}
 	
 	public boolean empty() {
 		return size() == 0;
+	}
+	
+	public static void main(String[] args) {
+		var list = new CircularList();
+		list.addHead(100);
+		list.addHead(200);
+		list.addTail(300);
+		list.addTail(400);
+		System.out.println(list.size());
+		list.draw();
 	}
 }

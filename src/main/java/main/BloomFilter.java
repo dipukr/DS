@@ -35,16 +35,16 @@ public class BloomFilter {
 		return hashes;
 	}
 
-	public static int crc32(String input) {
+	public static long crc32(String input) {
 		CRC32 crc = new CRC32();
 		crc.update(input.getBytes());
-		return (int) crc.getValue();
+		return crc.getValue();
 	}
 
-	public static int adler32(String input) {
-		Adler32 adler = new Adler32();
+	public static long adler32(String input) {
+		var adler = new Adler32();
 		adler.update(input.getBytes());
-		return (int) adler.getValue();
+		return adler.getValue();
 	}
 
 	public static void main(String[] args) {
